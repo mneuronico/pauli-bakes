@@ -656,6 +656,11 @@ footer a:hover {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
+    header {
+        position: sticky;
+        top: 0;
+    }
+
     .nav-container {
         flex-direction: column;
         gap: 1rem;
@@ -679,7 +684,7 @@ footer a:hover {
     }
 
     .hero {
-        padding-top: 140px;
+        padding-top: 80px; /* Header stays in flow on mobile, so reduce offset */
     }
 
     .hero h1 {

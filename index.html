@@ -33,8 +33,9 @@
             <nav>
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#catalogo">Catálogo</a></li>
                     <li><a href="#about">Sobre Pau</a></li>
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#club">Club Pauli Bakers</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
@@ -43,6 +44,7 @@
 
     <!-- Hero -->
     <section id="inicio" class="hero">
+        <div id="hero-backgrounds" class="hero-backgrounds" aria-hidden="true"></div>
         <div class="hero-content">
             <h1>Tus sueños se convierten en torta ✨</h1>
             <p>Pastelería artesanal y personalizada en Villa Crespo</p>
@@ -51,20 +53,43 @@
     </section>
 
     <!-- About -->
-    <section id="about" class="about">
+    <section id="about" class="about anchor-section">
         <div class="about-container">
-            <h2>Hola, soy Pau! 👋</h2>
-            <p>
-                Bienvenidos a Pauli Bakes. Mi misión es transformar tus ideas más dulces en realidad.
-                Me dedico a la pastelería profesional personalizada, poniendo amor y detalle en cada preparación.
-                Desde tortas clásicas hasta diseños únicos pintados a mano, cada producto es una obra de arte
-                comestible.
-            </p>
+            <div class="about-brand">
+                <img src="imgs/pauli bakes logo.png" alt="Logo Pauli Bakes" class="about-logo">
+                <p>Diseños personalizados, ingredientes premium y mucho amor pastelero.</p>
+            </div>
+            <div class="about-info">
+                <h2>Hola, soy Pau! 👋</h2>
+                <p>
+                    Bienvenidos a Pauli Bakes. Mi misión es transformar tus ideas más dulces en realidad.
+                    Me dedico a la pastelería profesional personalizada, poniendo amor y detalle en cada
+                    preparación. Desde tortas clásicas hasta diseños únicos pintados a mano, cada producto es una
+                    obra de arte comestible.
+                </p>
+                <div class="about-pillars">
+                    <div class="pillar-card">
+                        <h3>Misión</h3>
+                        <p>Crear pastelería artesanal que refleje la historia de cada celebración con materia prima
+                            noble y acabados prolijos.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h3>Visión</h3>
+                        <p>Ser el atelier de pastelería de referencia en CABA para quienes buscan piezas únicas y
+                            totalmente personalizadas.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h3>Experiencia Pauli</h3>
+                        <p>Acompaño todo el proceso creativo: escucho tu idea, propongo combinaciones de sabores y
+                            diseño una presentación memorable.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Catalog -->
-    <section id="catalogo" class="catalog">
+    <section id="catalogo" class="catalog anchor-section">
         <h2>Nuestro Catálogo</h2>
 
         <div class="filters">
@@ -82,17 +107,44 @@
         </div>
     </section>
 
+    <section id="club" class="club anchor-section">
+        <div class="club-card">
+            <div class="club-text">
+                <p class="club-eyebrow">Club exclusivo</p>
+                <h2>Club Pauli Bakers</h2>
+                <p>Suscribite por <strong>$35.000</strong> por mes y recibí todos los meses una caja sorpresa con 4 o 5
+                    delicias únicas e irrepetibles, creadas solo para la comunidad Pauli Bakers. Además, accedés a
+                    descuentos especiales en tus pedidos personalizados.</p>
+                <ul>
+                    <li>Box mensual con sabores secretos.</li>
+                    <li>Recetas disponibles solo para socios.</li>
+                    <li>Beneficios y descuentos exclusivos.</li>
+                </ul>
+                <div class="club-actions">
+                    <a class="btn-primary club-btn" target="_blank" rel="noopener"
+                        href="https://wa.me/5491167842994?text=Hola%20Pauli%20Bakes!%20Quiero%20suscribirme%20al%20Club%20Pauli%20Bakers.%20%C2%BFMe%20cont%C3%A1s%20los%20pasos%20para%20sumarme%3F">
+                        Quiero suscribirme
+                    </a>
+                </div>
+            </div>
+            <div class="club-image">
+                <img src="imgs/club pauli bakers.png" alt="Caja Club Pauli Bakers">
+            </div>
+        </div>
+    </section>
+
     <!-- Contact / Footer -->
-    <footer id="contacto">
+    <footer id="contacto" class="anchor-section">
         <div class="footer-content">
-            <img src="imgs/pauli bakes logo.png" alt="Pauli Bakes"
-                style="height: 80px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+            <img src="imgs/pauli bakes logo.png" alt="Pauli Bakes" class="footer-logo">
             <p>Villa Crespo, CABA, Argentina</p>
-            <p>pauli.bakes@gmail.com</p>
+            <p><a href="mailto:pauli.bakes@gmail.com">pauli.bakes@gmail.com</a></p>
+            <p><a href="https://wa.me/5491167842994" target="_blank" rel="noopener">WhatsApp: +54 9 11 6784-2994</a></p>
 
             <div class="social-links">
                 <a href="https://instagram.com/pauli.bakes" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="mailto:pauli.bakes@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/5491167842994" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
             </div>
 
             <p style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.7;">

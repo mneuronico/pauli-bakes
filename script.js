@@ -148,7 +148,7 @@ const products = [
                 type: "select",
                 choices: [
                     { label: "16 cm – 10/12 porciones ($42.000)", price: 42000 },
-                    { label: "20 cm – 15/20 porciones ($48.000)", price: 48000 }
+                    { label: "20 cm – 15/20 porciones ($60.000)", price: 60000 }
                 ]
             }
         ]
@@ -156,7 +156,7 @@ const products = [
     {
         id: "chocotorta-deco",
         name: "Chocotorta Deco 🍫🟪",
-        price: 48000, // Base price for smallest size
+        price: 52000, // Base price for smallest size
         description: "Capas intercaladas de crema chocotorta (queso crema y dulce de leche) y galletitas chocolinas, decorada con drip de chocolate (efecto chorreado 💧) y chocolatines de color a elección (hasta dos variedades).",
         image: "imgs/chocotorta deco.jpg",
         category: "Tortas",
@@ -165,8 +165,8 @@ const products = [
                 name: "Tamaño",
                 type: "select",
                 choices: [
-                    { label: "16 cm – 10/12 porciones ($48.000)", price: 48000 },
-                    { label: "20 cm – 15/20 porciones ($52.000)", price: 52000 }
+                    { label: "16 cm – 10/12 porciones ($52.000)", price: 52000 },
+                    { label: "20 cm – 15/20 porciones ($72.000)", price: 72000 }
                 ]
             },
             {
@@ -315,9 +315,9 @@ const products = [
                 name: "Tamaño",
                 type: "select",
                 choices: [
-                    { label: "15 cm (10–12 porciones) - Base ($45.000)", price: 45000, customDecoPrice: 40000 },
-                    { label: "20 cm (15–20 porciones) - Base ($55.000)", price: 55000, customDecoPrice: 50000 },
-                    { label: "24 cm (25–30 porciones) - Base ($70.000)", price: 70000, customDecoPrice: 60000 }
+                    { label: "15 cm (10–12 porciones) - Base ($45.000)", price: 45000, customDecoExtra: 40000 },
+                    { label: "20 cm (15–20 porciones) - Base ($55.000)", price: 55000, customDecoExtra: 50000 },
+                    { label: "24 cm (25–30 porciones) - Base ($70.000)", price: 70000, customDecoExtra: 60000 }
                 ]
             },
             {
@@ -325,7 +325,7 @@ const products = [
                 type: "select",
                 choices: [
                     { label: "Estándar / Simple (Precio Base)", priceMod: 0 },
-                    { label: "Personalizada (Ver costos arriba)", isDynamic: true }
+                    { label: "Personalizada (+ deco a medida)", isDynamic: true }
                 ]
             },
             {
@@ -362,9 +362,9 @@ const products = [
                 name: "Tamaño",
                 type: "select",
                 choices: [
-                    { label: "15 cm (10–12 porciones)", price: 55000, customDecoPrice: 60000 },
-                    { label: "20 cm (15–20 porciones)", price: 70000, customDecoPrice: 80000 },
-                    { label: "24 cm (25–30 porciones)", price: 90000, customDecoPrice: 100000 }
+                    { label: "15 cm (10–12 porciones)", price: 55000, customDecoExtra: 60000 },
+                    { label: "20 cm (15–20 porciones)", price: 70000, customDecoExtra: 80000 },
+                    { label: "24 cm (25–30 porciones)", price: 90000, customDecoExtra: 100000 }
                 ]
             },
             {
@@ -372,7 +372,7 @@ const products = [
                 type: "select",
                 choices: [
                     { label: "Estándar / Simple (Precio Base)", priceMod: 0 },
-                    { label: "Personalizada (Ver costos arriba)", isDynamic: true }
+                    { label: "Personalizada (+ deco a medida)", isDynamic: true }
                 ]
             },
             {
@@ -397,6 +397,15 @@ const products = [
             }
         ]
     }
+];
+
+const heroBackgrounds = [
+    "imgs/showcase 1.jpg",
+    "imgs/showcase 2.jpg",
+    "imgs/showcase 3.jpg",
+    "imgs/showcase 4.jpg",
+    "imgs/showcase 5.jpg",
+    "imgs/showcase 6.jpg"
 ];
 
 // --- LOGIC ---
@@ -425,6 +434,30 @@ function init() {
     renderProducts('all');
     updateCartUI();
     setupEventListeners();
+    initHeroBackgroundRotation();
+}
+
+function initHeroBackgroundRotation() {
+    const bgContainer = document.getElementById('hero-backgrounds');
+    if (!bgContainer || heroBackgrounds.length === 0) return;
+
+    heroBackgrounds.forEach((src, index) => {
+        const frame = document.createElement('div');
+        frame.className = 'hero-bg-frame';
+        frame.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${src}')`;
+        if (index === 0) frame.classList.add('active');
+        bgContainer.appendChild(frame);
+    });
+
+    const frames = bgContainer.querySelectorAll('.hero-bg-frame');
+    if (frames.length <= 1) return;
+
+    let current = 0;
+    setInterval(() => {
+        frames[current].classList.remove('active');
+        current = (current + 1) % frames.length;
+        frames[current].classList.add('active');
+    }, 6000);
 }
 
 // Render Products
@@ -501,7 +534,7 @@ function openModal(product) {
                         opt.innerText = choice.label;
                         if (choice.price) opt.dataset.price = choice.price;
                         if (choice.priceMod) opt.dataset.priceMod = choice.priceMod;
-                        if (choice.customDecoPrice) opt.dataset.customDecoPrice = choice.customDecoPrice;
+                        if (choice.customDecoExtra) opt.dataset.customDecoExtra = choice.customDecoExtra;
                         if (choice.isDynamic) opt.dataset.isDynamic = true;
                     }
                     select.appendChild(opt);
@@ -543,15 +576,17 @@ function updateModalPrice() {
         const selectedOption = select.options[select.selectedIndex];
         if (selectedOption.dataset.price) {
             price = parseInt(selectedOption.dataset.price);
-            // Store reference to size option if it has customDecoPrice
-            if (selectedOption.dataset.customDecoPrice) {
+            // Store reference to size option if it has custom deco surcharge
+            if (selectedOption.dataset.customDecoExtra) {
                 selectedSizeOption = selectedOption;
             }
         }
         currentOptions[select.dataset.optionName] = select.value;
     });
 
-    // Second pass: Apply modifiers and overrides
+    // Second pass: Apply modifiers and determine extra deco costs
+    let applyCustomDeco = false;
+
     selects.forEach(select => {
         const selectedOption = select.options[select.selectedIndex];
 
@@ -560,15 +595,14 @@ function updateModalPrice() {
             price += parseInt(selectedOption.dataset.priceMod);
         }
 
-        // Custom Deco Override logic
-        // If user selected "Personalizada" (isDynamic) AND we have a size selected with a custom price
-        if (selectedOption.dataset.isDynamic && selectedSizeOption) {
-            // Check if this specific option implies using the custom price
-            if (selectedOption.innerText.includes("Personalizada")) {
-                price = parseInt(selectedSizeOption.dataset.customDecoPrice);
-            }
+        if (selectedOption.dataset.isDynamic === 'true') {
+            applyCustomDeco = true;
         }
     });
+
+    if (applyCustomDeco && selectedSizeOption?.dataset.customDecoExtra) {
+        price += parseInt(selectedSizeOption.dataset.customDecoExtra);
+    }
 
     document.getElementById('modal-price').innerText = `$${price.toLocaleString('es-AR')}`;
     document.getElementById('add-to-cart-btn').dataset.finalPrice = price;
@@ -675,7 +709,7 @@ function checkout() {
     });
 
     message += `*Total Estimado: $${total.toLocaleString('es-AR')}*\n\n`;
-    message += `Espero confirmación de disponibilidad. Gracias! ✨`;
+    message += `Espero confirmación de disponibilidad. Gracias!`;
 
     const url = `https://wa.me/${businessInfo.whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');

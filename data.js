@@ -147,7 +147,7 @@ export const products = [
                 type: "select",
                 choices: [
                     { label: "16 cm – 10/12 porciones ($42.000)", price: 42000 },
-                    { label: "20 cm – 15/20 porciones ($48.000)", price: 48000 }
+                    { label: "20 cm – 15/20 porciones ($60.000)", price: 60000 }
                 ]
             }
         ]
@@ -155,7 +155,7 @@ export const products = [
     {
         id: "chocotorta-deco",
         name: "Chocotorta Deco 🍫🟪",
-        price: 48000, // Base price for smallest size
+        price: 52000, // Base price for smallest size
         description: "Capas intercaladas de crema chocotorta (queso crema y dulce de leche) y galletitas chocolinas, decorada con drip de chocolate (efecto chorreado 💧) y chocolatines de color a elección (hasta dos variedades).",
         image: "imgs/chocotorta deco.jpg",
         category: "Tortas",
@@ -164,8 +164,8 @@ export const products = [
                 name: "Tamaño",
                 type: "select",
                 choices: [
-                    { label: "16 cm – 10/12 porciones ($48.000)", price: 48000 },
-                    { label: "20 cm – 15/20 porciones ($52.000)", price: 52000 }
+                    { label: "16 cm – 10/12 porciones ($52.000)", price: 52000 },
+                    { label: "20 cm – 15/20 porciones ($72.000)", price: 72000 }
                 ]
             },
             {
@@ -314,60 +314,9 @@ export const products = [
                 name: "Tamaño",
                 type: "select",
                 choices: [
-                    { label: "15 cm (10–12 porciones) - Base ($45.000)", price: 45000 },
-                    { label: "15 cm (10–12 porciones) - Deco Personalizada ($40.000)", price: 40000 }, // Wait, the prompt says "Decoración personalizada... -> ARS 40.000". This seems to be the PRICE of the cake with that deco, or an EXTRA? 
-                    // Re-reading prompt: "Precios base... 15cm -> 45.000". "Decoración personalizada... 15cm -> 40.000". 
-                    // This is confusing. Usually custom deco is MORE expensive. 
-                    // Let's look at the numbers: Base 45k, Deco 40k. Base 55k, Deco 50k. Base 70k, Deco 60k.
-                    // Maybe "Decoración personalizada" listed there is the COST of the decoration itself? Or maybe it's a cheaper option?
-                    // "El valor de la torta depende del tamaño y decoración que necesites."
-                    // Actually, looking at "Tortas personalizadas – Forradas": Base 55k, Deco 60k. Base 70k, Deco 80k. Here Deco is HIGHER.
-                    // In Ganache: Base 45k, Deco 40k. Base 55k, Deco 50k. Base 70k, Deco 60k.
-                    // It's weird that "Deco personalizada" is CHEAPER than "Precio base" for Ganache.
-                    // Maybe "Precio base" INCLUDES some standard deco?
-                    // Or maybe I should treat them as two different price tiers.
-                    // Let's assume they are mutually exclusive options for the final price.
-                    // Option A: Base Price (Simple/Standard). Option B: Custom Deco Price.
-                    // But for Ganache, Custom is cheaper? That's odd.
-                    // Let's re-read carefully:
-                    // "Precios base (dependen del tamaño): 15cm -> 45.000..."
-                    // "Decoración personalizada (depende del tamaño): 15cm -> 40.000..."
-                    // Could it be that the "Decoración personalizada" is an ADDITIONAL cost?
-                    // "El valor de la torta depende del tamaño y decoración que necesites."
-                    // If it was additional, 45+40 = 85k. That sounds reasonable for a custom cake.
-                    // For Forradas: Base 55k. Deco 60k. Total 115k?
-                    // Let's look at the text again.
-                    // "Precios base... 15cm -> 45.000"
-                    // "Decoración personalizada... 15cm -> 40.000"
-                    // If I look at Forradas: Base 55k. Deco 60k.
-                    // If it's additive, it makes sense.
-                    // If it's replacement, why would custom be cheaper for Ganache?
-                    // I will assume it is ADDITIVE (Base + Deco tier).
-                    // Wait, "Precios base... 15cm -> 45.000". This likely covers the cake itself + simple sealing.
-                    // "Decoración personalizada... 15cm -> 40.000". This likely covers the complex decoration work.
-                    // So total = Base + Deco.
-                    // Let's implement it as: Base Price is fixed per size. Then user chooses "Tipo de Decoración": "Básica (Incluida)" or "Personalizada (+$40.000)".
-                    // BUT, the prompt lists "Decoración personalizada" with a price list. It doesn't explicitly say "Adicional".
-                    // However, for "Galletas", it says "Por un valor adicional de $2.000".
-                    // Here it lists "Precios base" and "Decoración personalizada" as two separate blocks.
-                    // Let's assume they are separate categories of PRICING, i.e., "If you want a base cake it's X, if you want custom deco it's Y".
-                    // But again, Custom < Base for Ganache is weird.
-                    // Let's look at the numbers again.
-                    // Ganache: Base 45, Custom 40. (Custom is -5k)
-                    // Forradas: Base 55, Custom 60. (Custom is +5k)
-                    // This inconsistency suggests maybe "Decoración personalizada" IS the price for that tier?
-                    // Maybe the "Base" for Ganache is actually more expensive because... I don't know.
-                    // Let's assume the user made a typo or I'm misunderstanding.
-                    // OR, maybe "Decoración personalizada" is the EXTRA cost.
-                    // If I assume it's EXTRA:
-                    // Ganache 15cm: 45k (cake) + 40k (deco) = 85k.
-                    // Forrada 15cm: 55k (cake) + 60k (deco) = 115k.
-                    // This seems consistent with "Professional Custom Cakes".
-                    // I will implement it as an ADD-ON option. "Agregar Decoración Personalizada".
-                    
-                    { label: "15 cm (10–12 porciones)", price: 45000, customDecoPrice: 40000 },
-                    { label: "20 cm (15–20 porciones)", price: 55000, customDecoPrice: 50000 },
-                    { label: "24 cm (25–30 porciones)", price: 70000, customDecoPrice: 60000 }
+                    { label: "15 cm (10–12 porciones) - Base ($45.000)", price: 45000, customDecoExtra: 40000 },
+                    { label: "20 cm (15–20 porciones) - Base ($55.000)", price: 55000, customDecoExtra: 50000 },
+                    { label: "24 cm (25–30 porciones) - Base ($70.000)", price: 70000, customDecoExtra: 60000 }
                 ]
             },
             {
@@ -375,7 +324,7 @@ export const products = [
                 type: "select",
                 choices: [
                     { label: "Estándar / Simple (Precio Base)", priceMod: 0 },
-                    { label: "Personalizada (Ver costos arriba)", isDynamic: true } // Logic will handle this based on size
+                    { label: "Personalizada (+ deco a medida)", isDynamic: true }
                 ]
             },
             {
@@ -386,7 +335,7 @@ export const products = [
             {
                 name: "Relleno 1",
                 type: "select",
-                choices: "FILLINGS_REFERENCE" // Will replace in code
+                choices: "FILLINGS_REFERENCE"
             },
             {
                 name: "Relleno 2",
@@ -412,9 +361,9 @@ export const products = [
                 name: "Tamaño",
                 type: "select",
                 choices: [
-                    { label: "15 cm (10–12 porciones)", price: 55000, customDecoPrice: 60000 },
-                    { label: "20 cm (15–20 porciones)", price: 70000, customDecoPrice: 80000 },
-                    { label: "24 cm (25–30 porciones)", price: 90000, customDecoPrice: 100000 }
+                    { label: "15 cm (10–12 porciones)", price: 55000, customDecoExtra: 60000 },
+                    { label: "20 cm (15–20 porciones)", price: 70000, customDecoExtra: 80000 },
+                    { label: "24 cm (25–30 porciones)", price: 90000, customDecoExtra: 100000 }
                 ]
             },
             {
@@ -422,7 +371,7 @@ export const products = [
                 type: "select",
                 choices: [
                     { label: "Estándar / Simple (Precio Base)", priceMod: 0 },
-                    { label: "Personalizada (Ver costos arriba)", isDynamic: true }
+                    { label: "Personalizada (+ deco a medida)", isDynamic: true }
                 ]
             },
             {

@@ -27,10 +27,17 @@
     <!-- Header -->
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">
-                <img src="imgs/pauli bakes logo.png" alt="Pauli Bakes Logo">
-            </a>
-            <nav>
+            <div class="nav-top">
+                <a href="#" class="logo">
+                    <img src="imgs/pauli bakes logo.png" alt="Pauli Bakes Logo">
+                </a>
+                <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav id="primary-navigation">
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#about">Sobre Pau</a></li>
